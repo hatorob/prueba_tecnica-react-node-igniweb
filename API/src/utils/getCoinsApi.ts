@@ -25,7 +25,6 @@ export const getCoinsApi = async() => {
             for(const el of data) {
                 const { name, symbol, quote } = el;
                 const { price, percent_change_24h: percentage_change, market_cap: volume, last_updated } = quote.USD;
-                console.log(price, percentage_change, volume, last_updated);
                 const [coins] = await pool.query(`
                     INSERT INTO crypto_coins (name, symbol)
                     VALUES (?, ?)

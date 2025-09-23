@@ -21,5 +21,5 @@ async function main() {
       } catch (err) {
         console.error("❌ Error en actualización:", err);
       }
-    }, 300000); */
+    }, 5 * 60 * 1000); */
 }

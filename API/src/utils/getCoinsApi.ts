@@ -33,7 +33,14 @@ export const getCoinsApi = async() => {
                       symbol = VALUES(symbol)
                 `,[name, symbol]);
 
-                const insertId = (coins as any).insertId;             
+                let insertId = (coins as any).insertId;   
+                if(insertId == 0) {
+                  const [coin] = await pool.query(`
+                    SELECT id FROM crypto_coins WHERE name=? AND symbol=?
+                  `,[name, symbol]);
+                  ;
+                  insertId = (coin as any)[0].id
+                }
                 const [coins_details] = await pool.query(`
                     INSERT INTO crypto_details (crypto_id, price, percentage_change, volume, last_update)
                     VALUES (?, ?, ?, ?, STR_TO_DATE(?, '%Y-%m-%dT%H:%i:%s.000Z'))

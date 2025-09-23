@@ -9,13 +9,28 @@ export class CoinsController {
     ){}
 
     public getCoins = async(req: Request, res: Response) => {
-
         try {
-            const [rows] = await pool.query("SELECT * FROM crypto_coins;");
+            const [coins] = await pool.query("SELECT id,name, symbol FROM crypto_coins;");
+            res.status(200).json(coins);
+        } catch (error: any) {
+            res.status(400).json({
+                error: error.message
+            });
+        }
+    }
+
+    public getCoinsDetailById = async(req: Request, res: Response) => {
+        try {
+            const id = req.params.id;
+            if(!id) throw new Error("id is required");
+            const [coins_details] = await pool.query(`
+                SELECT crypto_id, price, percentage_change, volume, last_update  
+                FROM crypto_details WHERE id=?;
+            `,[id]);
+            res.status(200).json(coins_details);
         } catch (error) {
             
         }
-        res.status(200).json("mensaje enviado correctamente");
     }
 
 }

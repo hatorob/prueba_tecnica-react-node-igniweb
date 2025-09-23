@@ -8,6 +8,7 @@ export class CoinsRoutes {
         const coinsController = new CoinsController();
         /* all tasks */
         router.get("/", coinsController.getCoins );
+        router.get("/details/:id", coinsController.getCoinsDetailById );
         return router;
     }
 }

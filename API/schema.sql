@@ -1,0 +1,23 @@
+CREATE DATABASE crypto_coins;
+
+CREATE TABLE crypto_coins (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    symbol VARCHAR(60) NOT NULL UNIQUE,
+    name VARCHAR(60) NOT NULL UNIQUE,
+    create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE crypto_details (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  crypto_id INT NOT NULL,
+  price DECIMAL(18,8) NOT NULL,
+  percentage_change DECIMAL(10,4) NOT NULL,
+  volume VARCHAR(20) NOT NULL,
+  create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  last_update TIMESTAMP,
+  FOREIGN KEY (crypto_id) REFERENCES crypto_coins(id) ON DELETE CASCADE
+);
+
+
+DELETE FROM crypto_details;
+ALTER TABLE crypto_details AUTO_INCREMENT = 1;

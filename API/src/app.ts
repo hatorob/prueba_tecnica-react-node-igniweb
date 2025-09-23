@@ -1,6 +1,7 @@
 import { envs } from "./config/envs";
 import { AppRoutes } from "./presentation/routes";
 import { AppServer } from "./presentation/server";
+import { getCoinsApi } from "./utils/getCoinsApi";
 
 
 
@@ -14,4 +15,11 @@ async function main() {
         routes: AppRoutes.routes
     });
     server.start();
+    /* setInterval(async () => {
+      try {
+        await getCoinsApi();
+      } catch (err) {
+        console.error("❌ Error en actualización:", err);
+      }
+    }, 300000); */
 }

@@ -23,7 +23,6 @@ export const getCoinsApi = async() => {
         const { data } = await response.json();
         if(data.length > 0) {
             for(const el of data) {
-                console.log(el);
                 const { name, symbol, quote } = el;
                 const { price, percent_change_24h: percentage_change, market_cap: volume, last_updated } = quote.USD;
                 console.log(price, percentage_change, volume, last_updated);
@@ -35,13 +34,7 @@ export const getCoinsApi = async() => {
                       symbol = VALUES(symbol)
                 `,[name, symbol]);
 
-                const insertId = (coins as any).insertId;
-                /* const formattedDate = new Date(last_updated)
-                .toISOString()
-                .slice(0, 19)
-                .replace("T", " "); */
-
-                
+                const insertId = (coins as any).insertId;             
                 const [coins_details] = await pool.query(`
                     INSERT INTO crypto_details (crypto_id, price, percentage_change, volume, last_update)
                     VALUES (?, ?, ?, ?, STR_TO_DATE(?, '%Y-%m-%dT%H:%i:%s.000Z'))

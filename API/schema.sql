@@ -19,5 +19,5 @@ CREATE TABLE crypto_details (
 );
 
 
-DELETE FROM crypto_details;
-ALTER TABLE crypto_details AUTO_INCREMENT = 1;
+DELETE FROM crypto_coins;
+ALTER TABLE crypto_coins AUTO_INCREMENT = 1;

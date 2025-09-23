@@ -15,11 +15,11 @@ async function main() {
         routes: AppRoutes.routes
     });
     server.start();
-    /* setInterval(async () => {
+    setInterval(async () => {
       try {
         await getCoinsApi();
       } catch (err) {
         console.error("❌ Error en actualización:", err);
       }
-    }, 5 * 60 * 1000); */
+    }, 5 * 60 * 1000);
 }
